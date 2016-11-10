@@ -38,7 +38,7 @@ export default createConnector({
     if (!resultsStruct.results) {
       this._allResults = [];
       return {
-        hits: [],
+        hits: this._allResults,
         isLastPage: true,
       };
     }
@@ -70,11 +70,11 @@ export default createConnector({
     const currentPage = widgetsState[props.id] ?
       widgetsState[props.id].page :
       0;
-    const isHitsPerPageDefined = typeof props.hitsPerPage !== 'undefined';
+    const isHitsPerPageDefined = typeof searchParameters.hitsPerPage !== 'undefined';
 
     return searchParameters.setQueryParameters({
       page: currentPage,
-      hitsPerPage: isHitsPerPageDefined ? props.hitsPerPage : searchParameters.hitsPerPage,
+      hitsPerPage: isHitsPerPageDefined ? searchParameters.hitsPerPage : props.hitsPerPage,
     });
   },
 
